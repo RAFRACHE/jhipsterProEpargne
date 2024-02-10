@@ -1,0 +1,55 @@
+entity Account {
+    accountNumber String required
+    balance Double required
+}
+
+entity Collaborator {
+    firstName String
+    lastName String
+    email String
+}
+
+entity Company {
+    companyName String required
+    industry String
+    // Ajoutez d'autres attributs selon les besoins de votre application
+}
+
+entity Contrat {
+    contratType String
+    startDate Instant
+    endDate Instant
+    // Ajoutez d'autres attributs selon les besoins de votre application
+}
+
+entity Transaction {
+    amount Double
+    transactionDate Instant
+    description String
+    // Ajoutez d'autres attributs selon les besoins de votre application
+}
+
+// Définir les relations entre les entités selon vos besoins
+// Exemple de relations fictives :
+relationship ManyToOne {
+    Collaborator{company} to Company
+}
+
+relationship OneToMany {
+    Collaborator{account} to Account
+}
+
+relationship ManyToOne {
+    Transaction{account} to Account
+}
+
+relationship ManyToOne {
+    Contrat{company} to Company
+}
+
+// Définir les options de pagination et de services selon vos préférences
+
+paginate Account, Collaborator, Company, Contrat, Transaction with pagination
+service all with serviceImpl
+
+// Vous pouvez également définir d'autres options comme les DTOs, les suffixes Angular, etc., selon vos besoins.
